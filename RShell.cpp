@@ -1,18 +1,17 @@
 #include "header/RShell.h"
 #include <string>
 #include <iostream>
-
+#include <sstream>
 
 using namespace std;
 
 RShell::RShell(){
-  cmd = input();
+ this->input();
 }
 
-string RShell::input(){
-  string str;
-  getline(cin, str);
-  return str;
+void RShell::input(){
+  output();
+  getline(cin, cmd);
 }
 
 void RShell::output(){
@@ -27,4 +26,15 @@ void RShell::output(string str){
   cout << str << endl;
 
   return;
+}
+
+void RShell::parseCommands(queue<Input*>* fill){
+  stringstream parse(cmd);
+  string inString;
+
+  while(parse.good()){
+    parse >> inString;
+    fill->push(new Input(inString));
+  }
+
 }
