@@ -10,14 +10,17 @@ int main(){
   queue<Input*>* commands = new queue<Input*>();
   RShell* terminal = new RShell();
 
-  terminal->parseCommands(commands);
+  while(!terminal->getExitStatus()){
+    terminal->parseCommands(commands);
 
-  while(commands->size()){
-    cout << (commands->front()->getCommand()) << endl;
-    commands->pop();
+    while(commands->size() && !terminal->getExitStatus()){
+//    cout << (commands->front()->getCommand()) << endl;
+//TODO: execute each command
+      commands->pop();
+    }
+
+      terminal->input();
   }
-
-
 
   return 0;
 }

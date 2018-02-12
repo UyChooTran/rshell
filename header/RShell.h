@@ -8,13 +8,14 @@ using namespace std;
 
 class RShell{
   public:
-     RShell();
-     string cmd;
-     void parseCommands(queue<Input*>* fill);
-  private:
+    RShell();
+    string cmd;
+    void parseCommands(queue<Input*>* fill);
+    bool getExitStatus();
     void input();
+  private:
     void output();
     void output(string str);
-
+    bool exit;
 };
 #endif

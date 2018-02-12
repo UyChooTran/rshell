@@ -6,7 +6,8 @@
 using namespace std;
 
 RShell::RShell(){
- this->input();
+  this->exit = false;
+  this->input();
 }
 
 void RShell::input(){
@@ -37,4 +38,8 @@ void RShell::parseCommands(queue<Input*>* fill){
     fill->push(new Input(inString));
   }
 
+}
+
+bool RShell::getExitStatus(){
+  return this->exit;
 }
