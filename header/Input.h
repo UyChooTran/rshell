@@ -18,6 +18,25 @@ private:
 
 };
 
+class Or:  public Input
+{ 
+
+  public:
+  int evaluate(queue<*Input>);
+
+};
+
+class And: public Input
+{
+  public:
+  int evaluate(queue<*Input> );
+};
 
 
+class Comment: public Input
+{
+  public:
+  int evaluate(queue<Input>);
+
+};
 #endif

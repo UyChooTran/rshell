@@ -33,6 +33,9 @@ int main(){
     else if(parse.back() != ';'){
       commands->push_back(parse);
     }
+    else if(parse.front() == "#" ){
+      
+    }	
     else{
       parse.pop_back();
       commands->push_back(parse);
