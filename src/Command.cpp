@@ -12,13 +12,12 @@ using namespace std;
 //might need to change to vector pointer
 Command::Command(vector<string>* arguments){
 
-
+  this->deleteThis = arguments;
   this->cmd = arguments->at(0).c_str();
   for(unsigned i = 0; i < arguments->size(); i++){
     this->args[i] = const_cast<char*>(arguments->at(i).c_str());
   }
   this->args[arguments->size()] = NULL;
-
 }
 
 
@@ -32,7 +31,7 @@ int Command::execute(queue<Input*>* inputs, int stat){
     exit(1);
   }
   else if(pid == 0){
-    if(execvp(cmd, args) < 0){
+    if(execvp(this->cmd, this->args) < 0){
       cout << "Invalid command" << endl;
       exit(1);
     }
@@ -40,6 +39,8 @@ int Command::execute(queue<Input*>* inputs, int stat){
   else{
     while(wait(&status) != pid);
   }
+
+  delete deleteThis;
 
   if(status){
     return 0;

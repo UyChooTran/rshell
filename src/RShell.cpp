@@ -56,7 +56,6 @@ void RShell::createInputs(){
 
   while(!this->strings->empty()){
     parse = strings->front();
-    //cout << parse <<endl;
     strings->pop();
     if(parse == "||"){
       inputs->push(new Or());
@@ -78,16 +77,15 @@ void RShell::createInputs(){
       commands->push_back(parse);
       if(this->strings->empty()){
         inputs->push(new Command(commands));
-        delete commands;
+        //delete commands;
         commands = 0;
       }
     }
     else{
       parse.pop_back();
-      //cout << parse << endl;
       commands->push_back(parse);
       inputs->push(new Command(commands));
-      delete commands;
+      //delete commands;
       commands = new vector<string>();
     }
 
