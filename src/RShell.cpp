@@ -1,4 +1,5 @@
 #include "../header/RShell.h"
+#include "../header/Input.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -8,7 +9,8 @@ using namespace std;
 RShell::RShell(){
   this->exit = false;
   this->strings = new queue<string>();
-  this->inputs = queue<Input*>();
+  this->inputs = new queue<Input*>();
+  int status = 0;
   this->input();
 }
 
@@ -16,6 +18,10 @@ void RShell::input(){
   output();
   getline(cin, cmd);
   this->parseCommands();
+}
+
+bool RShell::getExitStatus(){
+  return this->exit;
 }
 
 void RShell::output(){
@@ -39,43 +45,83 @@ void RShell::parseCommands(){
     parse >> inString;
     strings->push(inString);
   }
+  this->createInputs();
 
 }
 
 void RShell::createInputs(){
-  
+
   vector<string>* commands = new vector<string>();
   string parse;
 
-  while(!this->strings.empty()){
-    parse = strings.front();
-    strings.pop();
-    
+  while(!this->strings->empty()){
+    parse = strings->front();
+    //cout << parse <<endl;
+    strings->pop();
     if(parse == "||"){
-      inputs.push(new Or();
+      inputs->push(new Or());
     }
     else if(parse == "&&"){
-      inputs.push(new And();
+      inputs->push(new And());
+    }
+    else if(parse == "#"){
+      inputs->push(new Comment());
     }
     else if(parse.front() == '#'){
-      inputs.push(new Comment();
+      inputs->push(new Comment());
+      commands->push_back(parse.erase(0,1));
+    }
+    else if(parse == "exit" && commands->empty()){
+      inputs->push(new Exit());
     }
     else if(parse.back() != ';'){
       commands->push_back(parse);
+      if(this->strings->empty()){
+        inputs->push(new Command(commands));
+        delete commands;
+        commands = 0;
+      }
     }
     else{
       parse.pop_back();
+      //cout << parse << endl;
       commands->push_back(parse);
-      inputs.push(new Command(commands) 
+      inputs->push(new Command(commands));
       delete commands;
       commands = new vector<string>();
     }
 
   }
-  
+
   delete commands;
+  runInput();
 }
 
-bool RShell::getExitStatus(){
-  return this->exit;
+void RShell::runInput(){
+  Input* current;
+  while(!getExitStatus() && !this->inputs->empty()){
+    current = inputs->front();
+    inputs->pop();
+    this->status = current->execute(this->inputs, status);
+    switch (this->status) {
+      case -1:
+        this->exit = true;
+        while(!this->inputs->empty()){
+          delete current;
+          current = inputs->front();
+          inputs->pop();
+        }
+        break;
+      case -2:
+        while(!this->inputs->empty()){
+          delete current;
+          current = inputs->front();
+          inputs->pop();
+        }
+        break;
+      default:
+        break;
+    }
+    delete current;
+  }
 }

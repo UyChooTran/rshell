@@ -9,13 +9,18 @@ using namespace std;
 class RShell{
   public:
     RShell();
-    string cmd;
-    void parseCommands(queue<Input*>* fill);
     bool getExitStatus();
     void input();
   private:
+    string cmd;
+    int status;
+    queue<string>* strings;
+    queue<Input*>* inputs;
+    bool exit;
     void output();
     void output(string str);
-    bool exit;
+    void parseCommands();
+    void createInputs();
+    void runInput();
 };
 #endif

@@ -3,10 +3,12 @@
 using namespace std;
 
 
-Input::Input(string str){
-  command = str; 
+Input::Input(){
+
 }
 
-string Input::getCommand(){
-  return command;
+Exit::Exit() : Input(){}
+
+int Exit::execute(queue<Input*>* q, int status){
+  return -1;
 }
