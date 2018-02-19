@@ -28,7 +28,7 @@ ExeObj::ExeObj(vector<string> arguments){
 int ExeObj::run(){
 
   pid_t pid = fork();
-  int status;
+  int status = 1;
 
   if(pid < 0){
     printf("Failed to fork child\n");
@@ -42,11 +42,15 @@ int ExeObj::run(){
     }
   }
   else{   
-    cout << "parent" <<endl;
-    while(wait(&status) != pid);
 
+    while(wait(&status) != pid);
+//    cout << "parent" <<endl;
+//    cout << status <<endl;
   }
   
+  if(status){
+    return 0;
+  }
   return 1;
 
 }
