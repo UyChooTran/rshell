@@ -6,11 +6,12 @@
 
 int main()
 {
-    char* buf[3];
-    buf[0] = "ls";
-    buf[1] = "-la";
-    buf[2] = NULL;
-    char* command = "ls";
+    char* buf[4];
+    buf[0] = "echo";
+    buf[1] = "fjkdgjhdjkghdfjkghdfjkhgkjdfgdfhgjkdfhgjkdh";
+    buf[2] = " dfdsf";
+    buf[3] = NULL;
+    char* command = "echo";
 
       pid_t pid;
 
