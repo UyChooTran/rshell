@@ -17,5 +17,6 @@ class RShell{
     void output();
     void output(string str);
     bool exit;
+    int previousStatus;
 };
 #endif

@@ -14,7 +14,7 @@ int main(){
     terminal->parseCommands(commands);
 
     while(commands->size() && !terminal->getExitStatus()){
-    cout << (commands->front()->getCommand()) << endl;
+//    cout << (commands->front()->getCommand()) << endl;
 //TODO: execute each command
       commands->pop();
     }
