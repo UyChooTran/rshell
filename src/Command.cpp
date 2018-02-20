@@ -1,3 +1,5 @@
+// This file implements command class
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -9,7 +11,6 @@
 
 using namespace std;
 
-//might need to change to vector pointer
 Command::Command(vector<string>* arguments){
 
   this->deleteThis = arguments;

@@ -1,3 +1,5 @@
+// This file implements the RShell class
+
 #include "../header/RShell.h"
 #include "../header/Input.h"
 #include <string>
@@ -34,7 +36,6 @@ void RShell::output(){
 }
 
 void RShell::output(string str){
-//Newline?
   cout << str << endl;
 
   return;

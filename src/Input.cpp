@@ -1,3 +1,5 @@
+// This file implements input ans exit classes
+
 #include "../header/Input.h"
 
 using namespace std;

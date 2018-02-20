@@ -1,3 +1,5 @@
+// This file implements the connectors and comment classes
+
 #include "../header/Input.h"
 #include <iostream>
 using namespace std;
