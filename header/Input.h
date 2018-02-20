@@ -7,6 +7,9 @@
 
 using namespace std;
 
+// Input class is the interface user will use
+// it has constructor, destructor
+// and pure virtual function for derived classes
 class Input{
 
 public:
@@ -15,6 +18,9 @@ public:
   virtual int execute(queue<Input*>*, int) = 0;
 };
 
+// Command class is derived from Input class
+// constructor needs a vector of strings
+// has destructor and implements virtual function from Input class
 class Command : public Input{
   public:
     Command(vector<string>*);
@@ -27,6 +33,9 @@ class Command : public Input{
     char* args[255];
 };
 
+//derived from input class
+//has constructor, destructor
+//and implements virtual function from input class
 class Connector : public Input{
   public:
     Connector();
@@ -34,6 +43,9 @@ class Connector : public Input{
     virtual int execute(queue<Input*>*, int) = 0;
 };
 
+// derived from input class
+// has constructor destructor
+// implements execute from input class
 class Exit : public Input{
   public:
     Exit();
@@ -41,6 +53,8 @@ class Exit : public Input{
     int execute(queue<Input*>*, int);
 };
 
+// derived from connector class
+// implements functionality for execution from connector class
 class And : public Connector{
   public:
     And();
@@ -48,6 +62,8 @@ class And : public Connector{
     int execute(queue<Input*>*, int);
 };
 
+// derived from connector class
+// implements its own execute function
 class Comment : public Connector{
   public:
     Comment();
@@ -55,6 +71,8 @@ class Comment : public Connector{
     int execute(queue<Input*>*, int);
 };
 
+// derived from connector class
+// implements its own execute function
 class Or : public Connector{
   public:
     Or();
