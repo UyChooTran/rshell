@@ -4,15 +4,16 @@
 #include <queue>
 #include <string>
 #include "Input.h"
+
 using namespace std;
 
 class RShell{
-  public:
-    RShell();
-    bool getExitStatus();
-    void input();
+  public: 
+    RShell(); // constructor
+    bool getExitStatus(); // bool for exit command
+    void input(); // user input
   private:
-    string cmd;
+    string cmd; 
     int status;
     queue<string>* strings;
     queue<Input*>* inputs;

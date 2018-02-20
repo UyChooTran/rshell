@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// constructor to give variables initial values
 RShell::RShell(){
   this->exit = false;
   this->strings = new queue<string>();
@@ -14,16 +15,20 @@ RShell::RShell(){
   this->input();
 }
 
+// outputs prompt
+// gets user inputs and then parses them
 void RShell::input(){
   output();
   getline(cin, cmd);
   this->parseCommands();
 }
 
+// flag for if exit command was executed
 bool RShell::getExitStatus(){
   return this->exit;
 }
 
+// outputs prompt
 void RShell::output(){
 //TODO: Print the current working directory and user
   cout << "$ ";
@@ -31,13 +36,14 @@ void RShell::output(){
   return;
 }
 
+// utputs user input
 void RShell::output(string str){
-//Newline?
   cout << str << endl;
 
   return;
 }
 
+// parses the user input
 void RShell::parseCommands(){
   stringstream parse(cmd);
   string inString;
@@ -49,6 +55,8 @@ void RShell::parseCommands(){
 
 }
 
+// checks for if user wrote &&, ||, # or ;
+// and behaves accordingly
 void RShell::createInputs(){
 
   vector<string>* commands = new vector<string>();
@@ -97,6 +105,7 @@ void RShell::createInputs(){
   runInput();
 }
 
+// executes caommands
 void RShell::runInput(){
   Input* current;
   while(!getExitStatus() && !this->inputs->empty()){

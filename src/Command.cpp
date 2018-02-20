@@ -9,19 +9,19 @@
 
 using namespace std;
 
-//might need to change to vector pointer
+//converts vector of strings into c_str  
 Command::Command(vector<string>* arguments){
 
-
   this->cmd = arguments->at(0).c_str();
-  for(unsigned i = 0; i < arguments->size(); i++){
+  for( int i = 0; i < arguments->size(); ++i){
     this->args[i] = const_cast<char*>(arguments->at(i).c_str());
   }
   this->args[arguments->size()] = NULL;
 
 }
 
-
+// forks child process and wiats for parent process to finish
+// doesn't execute of fork failed or invalid command
 int Command::execute(queue<Input*>* inputs, int stat){
 
   pid_t pid = fork();
@@ -38,10 +38,10 @@ int Command::execute(queue<Input*>* inputs, int stat){
     }
   }
   else{
-    while(wait(&status) != pid);
+    while(wait(&status) != pid){}
   }
 
-  if(status){
+  if(status ){
     return 0;
   }
   return 1;
