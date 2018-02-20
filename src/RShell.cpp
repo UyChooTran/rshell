@@ -19,7 +19,7 @@ RShell::RShell(){
 void RShell::input(){
   output();
   getline(cin, cmd);
-  if(cmd != ""){
+  if(cmd != ""){//checks if an empty string was inputted
     this->parseCommands();
   }
 }
@@ -121,7 +121,7 @@ void RShell::runInput(){
     inputs->pop();
     this->status = current->execute(this->inputs, this->status);
     switch (this->status) {
-      case -1:
+      case -1://Exit returns -1
         this->exit = true;
         while(!this->inputs->empty()){
           delete current;
@@ -129,14 +129,14 @@ void RShell::runInput(){
           inputs->pop();
         }
         break;
-      case -2:
+      case -2://A comment returns -2
         while(!this->inputs->empty()){
           delete current;
           current = inputs->front();
           inputs->pop();
         }
         break;
-      default:
+      default://Status can be either 0 or 1, signaling the success
         break;
     }
     delete current;

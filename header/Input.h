@@ -28,9 +28,9 @@ class Command : public Input{
     int execute(queue<Input*>*, int);
 
   private:
-    vector<string>* deleteThis;
-    const char* cmd;
-    char* args[255];
+    vector<string>* deleteThis;//If deleted outside of object, a seg fault occurs
+    const char* cmd;//Stores the file name
+    char* args[255];//Stores command and arguments
 };
 
 //derived from input class
@@ -46,6 +46,7 @@ class Connector : public Input{
 // derived from input class
 // has constructor destructor
 // implements execute from input class
+//Tells the RShell when to exit
 class Exit : public Input{
   public:
     Exit();
@@ -55,6 +56,7 @@ class Exit : public Input{
 
 // derived from connector class
 // implements functionality for execution from connector class
+// Signals an &&
 class And : public Connector{
   public:
     And();
@@ -64,6 +66,7 @@ class And : public Connector{
 
 // derived from connector class
 // implements its own execute function
+//Signals to ignore the rest of the line
 class Comment : public Connector{
   public:
     Comment();
@@ -73,6 +76,7 @@ class Comment : public Connector{
 
 // derived from connector class
 // implements its own execute function
+//Signals a ||
 class Or : public Connector{
   public:
     Or();
