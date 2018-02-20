@@ -76,8 +76,16 @@ void RShell::createInputs(){
     }
     else if(parse == "#"){
       inputs->push(new Comment());
+      if(!commands->empty()){
+        inputs->push(new Command(commands));
+        commands = new vector<string>();
+      }
     }
     else if(parse.front() == '#'){
+      if(!commands->empty()){
+        inputs->push(new Command(commands));
+        commands = new vector<string>();
+      }
       inputs->push(new Comment());
       commands->push_back(parse.erase(0,1));
     }
