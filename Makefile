@@ -1,15 +1,23 @@
 CC = g++
 CC_FLAGS = -Wall -Werror -ansi -pedantic -std=c++11
-EXEC = test.out
-SOURCES = $(wildcard *.cpp)
+
+EXECUTABLE = rshell
+SOURCEDIR = src
+BUILDDIR = bin
+
+SOURCES = $(wildcard $(SOURCEDIR)/*.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
 
-$(EXEC): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(EXEC)
+all: $(OBJECTS)
+	mkdir -p $(BUILDDIR)
+	$(CC) $(OBJECTS) -o $(BUILDDIR)/$(EXECUTABLE)
+rshell: $(OBJECTS)
+	mkdir -p $(BUILDDIR)
+	$(CC) $(OBJECTS) -o $(BUILDDIR)/$(EXECUTABLE)
 
 %.o: %.cpp
 	$(CC) -c $(CC_FLAGS) $< -o $@
 
 clean: 
-	rm -f $(EXEC) $(OBJECTS)
-
+	rm -f $(EXECUTABLE) $(OBJECTS)
+	rm -rf $(BUILDDIR)
