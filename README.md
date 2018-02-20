@@ -6,7 +6,9 @@ The connectors which can be used are || (or), && (and), and ; (semi-colon):
 If a command is followed ;, then the next command is always executed.
 If a command is followed by &&, then the next command is executed only if the first one fails.
 If a command is followed by ||, then the next command is executed only if the first one fails.
+
 There is no limit to the number of commands that can be chained together.
+
 Everything after a "#" is considered a comment.
 
 Our commands are executed using the C++ system calls: fork(), execvp() and waitpid().
