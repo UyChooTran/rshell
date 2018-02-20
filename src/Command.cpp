@@ -35,6 +35,9 @@ int Command::execute(queue<Input*>* inputs, int stat){
       cout << "Invalid command" << endl;
       exit(1);
     }
+    else{
+      exit(0);
+    }
   }
   else{
     while(wait(&status) != pid);

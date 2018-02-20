@@ -1,5 +1,5 @@
 #include "../header/Input.h"
-
+#include <iostream>
 using namespace std;
 
 Connector::Connector() : Input(){}
@@ -12,7 +12,6 @@ Or::Or() : Connector(){}
 
 int And::execute(queue<Input*>* inputs, int status){
   Input* next = 0;
-  inputs->pop();
   next = inputs->front();
   inputs->pop();
   if(status){
@@ -31,7 +30,6 @@ int Comment::execute(queue<Input*>* inputs, int status){
 
 int Or::execute(queue<Input*>* inputs, int status){
   Input* next = 0;
-  inputs->pop();
   next = inputs->front();
   inputs->pop();
   if(status == 0){
