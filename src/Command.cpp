@@ -32,7 +32,7 @@ int Command::execute(queue<Input*>* inputs, int stat){
   }
   else if(pid == 0){
     if(execvp(this->cmd, this->args) < 0){
-      cout << "Invalid command" << endl;
+      perror("Invalid command");
       exit(1);
     }
     else{
