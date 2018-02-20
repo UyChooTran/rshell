@@ -6,6 +6,8 @@
 #include "Input.h"
 using namespace std;
 
+// this class also uses type Input from input class
+// it is responsible for running everything
 class RShell{
   public:
     RShell();
