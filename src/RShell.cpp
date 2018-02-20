@@ -64,12 +64,19 @@ void RShell::createInputs(){
 
   while(!this->strings->empty()){
     parse = strings->front();
-    //cout << parse <<endl;
     strings->pop();
     if(parse == "||"){
+      if(!commands->empty()){
+        inputs->push(new Command(commands));
+        commands = new vector<string>();
+      }
       inputs->push(new Or());
     }
     else if(parse == "&&"){
+      if(!commands->empty()){
+        inputs->push(new Command(commands));
+        commands = new vector<string>();
+      }
       inputs->push(new And());
     }
     else if(parse == "#"){
@@ -86,16 +93,15 @@ void RShell::createInputs(){
       commands->push_back(parse);
       if(this->strings->empty()){
         inputs->push(new Command(commands));
-        delete commands;
+        //delete commands;
         commands = 0;
       }
     }
     else{
       parse.pop_back();
-      //cout << parse << endl;
       commands->push_back(parse);
       inputs->push(new Command(commands));
-      delete commands;
+      //delete commands;
       commands = new vector<string>();
     }
 
@@ -111,7 +117,7 @@ void RShell::runInput(){
   while(!getExitStatus() && !this->inputs->empty()){
     current = inputs->front();
     inputs->pop();
-    this->status = current->execute(this->inputs, status);
+    this->status = current->execute(this->inputs, this->status);
     switch (this->status) {
       case -1:
         this->exit = true;

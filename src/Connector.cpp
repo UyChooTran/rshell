@@ -1,5 +1,5 @@
 #include "../header/Input.h"
-
+#include <iostream>
 using namespace std;
 
 Connector::Connector() : Input(){}

@@ -28,8 +28,9 @@ class Command : public Input{
     int execute(queue<Input*>*, int);
 
   private:
-   const char* cmd;
-   char* args[255];
+    vector<string>* deleteThis;
+    const char* cmd;
+    char* args[255];
 };
 
 // Exit class derives from Input class
