@@ -12,4 +12,11 @@ There is no limit to the number of commands that can be chained together.
 Everything after a "#" is considered a comment.
 
 Our commands are executed using the C++ system calls: fork(), execvp() and waitpid().
+
+List of known bugs:
+
+Doesn't output the user directory
+
+The cd command does not execute
+
    
