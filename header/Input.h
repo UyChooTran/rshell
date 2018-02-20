@@ -11,13 +11,14 @@ class Input{
 
 public:
   Input();
+  virtual ~Input(){};
   virtual int execute(queue<Input*>*, int) = 0;
 };
 
 class Command : public Input{
   public:
     Command(vector<string>*);
-    ~Command();
+    ~Command(){};
     int execute(queue<Input*>*, int);
 
   private:
@@ -29,30 +30,35 @@ class Command : public Input{
 class Connector : public Input{
   public:
     Connector();
+    virtual ~Connector(){};
     virtual int execute(queue<Input*>*, int) = 0;
 };
 
 class Exit : public Input{
   public:
     Exit();
+    ~Exit(){};
     int execute(queue<Input*>*, int);
 };
 
 class And : public Connector{
   public:
     And();
+    ~And(){};
     int execute(queue<Input*>*, int);
 };
 
 class Comment : public Connector{
   public:
     Comment();
+    ~Comment(){};
     int execute(queue<Input*>*, int);
 };
 
 class Or : public Connector{
   public:
     Or();
+    ~Or(){};
     int execute(queue<Input*>*, int);
 };
 

@@ -10,14 +10,16 @@ RShell::RShell(){
   this->exit = false;
   this->strings = new queue<string>();
   this->inputs = new queue<Input*>();
-  int status = 0;
+  status = 0;
   this->input();
 }
 
 void RShell::input(){
   output();
   getline(cin, cmd);
-  this->parseCommands();
+  if(cmd != ""){
+    this->parseCommands();
+  }
 }
 
 bool RShell::getExitStatus(){
